@@ -28,7 +28,28 @@ export const gabFacts = [
   "Gab's shadow has its own Instagram account with more followers than him.",
   "Gab once won a staring contest with his webcam.",
   "Gab doesn't need a password manager. Passwords reveal themselves to him voluntarily.",
-  "Gab doesn't open incognito mode. Incognito mode opens Gab."
+  "Gab doesn't open incognito mode. Incognito mode opens Gab.",
+  "Gab doesn't use AI, AI uses Gab for training data.",
+  "When Gab uploads to GitHub, GitHub says thank you.",
+  "Gab's brain runs on quantum computing principles from the future.",
+  "Gab knows the person who actually did invent Bitcoin.",
+  "Gab once fixed a production bug by intimidating the server.",
+  "Gab can hear radio waves. That's why he sometimes randomly dances.",
+  "Gab doesn't sleep, he enters low-power mode.",
+  "When Gab says 'Hello World', entire programming languages are created.",
+  "Gab's dreams are rendered in 8K at 240fps.",
+  "Aliens have tried to abduct Gab multiple times but returned him because he kept refactoring their spaceship code.",
+  "Gab doesn't need Stack Overflow. Stack Overflow needs Gab.",
+  "Gab wrote an AI that can pass the Turing test, but it was too sassy to release.",
+  "Gab once sneezed and accidentally created a new JavaScript framework.",
+  "The clouds move out of the way when Gab looks up at the sky.",
+  "Gab doesn't have a rubber duck for debugging. He has a rubber T-Rex.",
+  "Gab doesn't follow coding conventions. Coding conventions follow Gab.",
+  "Gab's DNA is actually written in TypeScript.",
+  "When Gab meditates, he solves NP-hard problems.",
+  "Gab's coffee doesn't wake him up. He wakes up the coffee.",
+  "Gab can center a div with a single line of CSS. Every time.",
+  "Gab's code has no technical debt, the technology owes him."
 ];
 
 export const getRandomFact = (): string => {
