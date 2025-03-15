@@ -18,6 +18,8 @@ const sounds: Sound[] = [
   { name: 'witch-laugh', path: '/witch-laugh.mp3', volume: 0.3 },
   { name: 'horror-scream', path: '/horror-scream.mp3', volume: 0.3 },
   { name: 'jumpscare', path: '/jumpscare.mp3', volume: 0.5 },
+  { name: 'police-siren', path: '/police-siren.mp3', volume: 0.3 },
+  { name: 'alarm', path: '/alarm.mp3', volume: 0.3 },
 ];
 
 export const playRandomSound = (): void => {

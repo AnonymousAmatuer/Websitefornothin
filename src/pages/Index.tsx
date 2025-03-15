@@ -11,9 +11,10 @@ import ToiletGreeting from '@/components/ToiletGreeting';
 import SkibidiToilet from '@/components/SkibidiToilet';
 import HackerScreen from '@/components/HackerScreen';
 import HorrifyingTroll from '@/components/HorrifyingTroll';
+import PoliceAlert from '@/components/PoliceAlert';
 import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Skull, Zap, Shield, Ghost, Bomb, Radiation, BugPlay, AlarmClockOff } from 'lucide-react';
+import { Skull, Zap, Shield, Ghost, Bomb, Radiation, BugPlay, AlarmClockOff, Siren, AlertTriangle } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 
 interface Popup {
@@ -31,6 +32,7 @@ const Index: React.FC = () => {
   const [showHackerScreen, setShowHackerScreen] = useState(false);
   const [colorTheme, setColorTheme] = useState(0);
   const [showHorrifyingTroll, setShowHorrifyingTroll] = useState(false);
+  const [showPoliceAlert, setShowPoliceAlert] = useState(false);
   
   const { toast } = useToast();
   
@@ -49,13 +51,25 @@ const Index: React.FC = () => {
     'bg-[url("/creepy-bg.jpg")]',
     'bg-gradient-to-r from-red-800 via-black to-purple-800',
     'bg-gradient-to-r from-black via-red-900 to-black',
-    'bg-[url("/skull-pattern.png")]'
+    'bg-[url("/skull-pattern.png")]',
+    'bg-gradient-to-r from-blue-900 via-black to-red-900',
+    'bg-gradient-to-r from-green-900 via-black to-purple-900',
+    'bg-gradient-to-r from-yellow-800 via-red-900 to-purple-900',
   ];
+  
+  // Show police alert when the page loads after greeting
+  useEffect(() => {
+    if (!showGreeting) {
+      setTimeout(() => {
+        setShowPoliceAlert(true);
+      }, 1000);
+    }
+  }, [showGreeting]);
   
   // Auto-trigger hacker screen after a random time
   useEffect(() => {
     if (!showGreeting) {
-      const hackDelay = Math.random() * 10000 + 15000; // Between 15-25 seconds
+      const hackDelay = Math.random() * 8000 + 10000; // Between 10-18 seconds
       const hackTimeout = setTimeout(() => {
         setShowHackerScreen(true);
         
@@ -86,7 +100,11 @@ const Index: React.FC = () => {
           "FILES BEING DELETED...",
           "WEBCAM ACTIVATED!",
           "YOUR DATA IS BEING STOLEN!",
-          "PASSWORDS COMPROMISED!"
+          "PASSWORDS COMPROMISED!",
+          "POLICE ARE TRACKING YOU!",
+          "CRIMINAL ACTIVITY DETECTED!",
+          "PAY $1000 FINE NOW!",
+          "BROWSER HISTORY EXPOSED!"
         ];
         
         toast({
@@ -97,7 +115,7 @@ const Index: React.FC = () => {
         });
         
         playRandomSound();
-      }, 7000);
+      }, 5000);
       
       return () => clearInterval(toastInterval);
     }
@@ -105,16 +123,16 @@ const Index: React.FC = () => {
   
   useEffect(() => {
     const spawnAlien = () => {
-      const delay = Math.random() * 1000 + 500; // More frequent aliens
+      const delay = Math.random() * 800 + 200; // More frequent aliens
       alienTimeoutRef.current = setTimeout(() => {
         setAliens(prev => [...prev, Date.now()]);
-        if (aliens.length < 35) { // More aliens
+        if (aliens.length < 50) { // More aliens
           spawnAlien();
         }
       }, delay);
     };
     
-    if (!showGreeting && aliens.length < 30) {
+    if (!showGreeting && aliens.length < 40) {
       spawnAlien();
     }
     
@@ -127,16 +145,16 @@ const Index: React.FC = () => {
   
   useEffect(() => {
     const spawnToilet = () => {
-      const delay = Math.random() * 2000 + 1000; // More frequent toilets
+      const delay = Math.random() * 1500 + 500; // More frequent toilets
       toiletTimeoutRef.current = setTimeout(() => {
         setSkibidiToilets(prev => [...prev, Date.now()]);
-        if (skibidiToilets.length < 18) { // More toilets
+        if (skibidiToilets.length < 25) { // More toilets
           spawnToilet();
         }
       }, delay);
     };
     
-    if (!showGreeting && skibidiToilets.length < 15) {
+    if (!showGreeting && skibidiToilets.length < 20) {
       spawnToilet();
     }
     
@@ -149,7 +167,7 @@ const Index: React.FC = () => {
   
   useEffect(() => {
     const spawnPopup = () => {
-      const delay = Math.random() * 3000 + 1000; // More frequent popups
+      const delay = Math.random() * 500 + 200; // About 2 popups per second
       popupTimeoutRef.current = setTimeout(() => {
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
@@ -160,7 +178,7 @@ const Index: React.FC = () => {
         const x = Math.max(10, Math.floor(Math.random() * maxX));
         const y = Math.max(10, Math.floor(Math.random() * maxY));
         
-        const popupType = Math.random() > 0.4 ? 'scary' : 'fact';
+        const popupType = Math.random() > 0.4 ? 'scary' as const : 'fact' as const;
         
         setPopups(prev => [...prev, { id: Date.now(), position: { x, y }, type: popupType }]);
         setPopupCounter(prev => prev + 1);
@@ -182,7 +200,7 @@ const Index: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setColorTheme(prev => (prev + 1) % backgroundThemes.length);
-    }, 3000); // Faster color switching
+    }, 1500); // Faster color switching
     
     return () => clearInterval(interval);
   }, []);
@@ -195,7 +213,7 @@ const Index: React.FC = () => {
   
   useEffect(() => {
     const playSound = () => {
-      const delay = Math.random() * 5000 + 1000; // More frequent sounds
+      const delay = Math.random() * 3000 + 500; // More frequent sounds
       soundTimeoutRef.current = setTimeout(() => {
         playRandomSound();
         playSound();
@@ -205,7 +223,7 @@ const Index: React.FC = () => {
     if (!showGreeting) {
       const initialDelay = setTimeout(() => {
         playSound();
-      }, 1500);
+      }, 1000);
       
       return () => {
         clearTimeout(initialDelay);
@@ -229,13 +247,13 @@ const Index: React.FC = () => {
   const handleClosePopup = (id: number) => {
     setPopups(prev => prev.filter(popup => popup.id !== id));
     
-    // Spawn two popups when closing one
+    // Spawn four popups when closing one
     setTimeout(() => {
       const screenWidth = window.innerWidth;
       const screenHeight = window.innerHeight;
       
-      // Create two new popups
-      const newPopups: Popup[] = Array.from({ length: 2 }, () => {
+      // Create four new popups
+      const newPopups: Popup[] = Array.from({ length: 4 }, () => {
         const maxX = screenWidth - 320;
         const maxY = screenHeight - 200;
         
@@ -248,7 +266,7 @@ const Index: React.FC = () => {
       });
       
       setPopups(prev => [...prev, ...newPopups]);
-    }, 500);
+    }, 300);
   };
   
   const handleHackerButtonClick = () => {
@@ -267,14 +285,20 @@ const Index: React.FC = () => {
     }, 8000);
   };
   
+  const handlePoliceButtonClick = () => {
+    setShowPoliceAlert(true);
+    playSpecificSound('police-siren');
+  };
+  
   return (
-    <div className={`min-h-screen ${backgroundThemes[colorTheme]} cursor-pointer transition-colors duration-1000`}>
+    <div className={`min-h-screen ${backgroundThemes[colorTheme]} cursor-pointer transition-colors duration-700`}>
       {showGreeting && (
         <ToiletGreeting onComplete={() => setShowGreeting(false)} />
       )}
       
       <HackerScreen open={showHackerScreen} onClose={() => setShowHackerScreen(false)} />
       <HorrifyingTroll open={showHorrifyingTroll} onClose={() => setShowHorrifyingTroll(false)} />
+      <PoliceAlert open={showPoliceAlert} onClose={() => setShowPoliceAlert(false)} />
       
       <Timer />
       
@@ -294,7 +318,7 @@ const Index: React.FC = () => {
           onClick={() => {
             playSpecificSound('jumpscare');
             // Create multiple scary popups
-            const newPopups: Popup[] = Array.from({ length: 5 }, () => {
+            const newPopups: Popup[] = Array.from({ length: 10 }, () => {
               const screenWidth = window.innerWidth;
               const screenHeight = window.innerHeight;
               
@@ -317,10 +341,21 @@ const Index: React.FC = () => {
         </Button>
       </div>
       
+      <div className="fixed top-16 right-4 z-50">
+        <Button 
+          onClick={handlePoliceButtonClick}
+          className="bg-gradient-to-r from-blue-800 to-blue-600 text-white hover:from-blue-600 hover:to-blue-800 animate-pulse-border border-2 border-blue-300 px-4 py-2 rounded font-mono flex items-center gap-2"
+        >
+          <Siren className="h-5 w-5 text-white" />
+          POLICE ALERT
+          <AlertTriangle className="h-5 w-5 text-yellow-400" />
+        </Button>
+      </div>
+      
       <div className="fixed bottom-4 left-4 z-50">
         <Button 
           onClick={() => {
-            const newToilets = Array.from({ length: 8 }, () => Date.now() + Math.random() * 1000);
+            const newToilets = Array.from({ length: 12 }, () => Date.now() + Math.random() * 1000);
             setSkibidiToilets(prev => [...prev, ...newToilets]);
             playSpecificSound('fart');
           }}
@@ -332,7 +367,7 @@ const Index: React.FC = () => {
         </Button>
       </div>
       
-      <div className="fixed top-16 right-4 z-50">
+      <div className="fixed top-16 left-4 z-50">
         <Button 
           onClick={() => {
             setShowHorrifyingTroll(true);

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
 import { playSpecificSound } from '@/assets/sounds';
-import { Skull, Ghost, BugPlay } from 'lucide-react';
+import { Skull, Ghost, BugPlay, AlertTriangle, Virus, Siren } from 'lucide-react';
 
 interface HorrifyingTrollProps {
   open: boolean;
@@ -23,16 +23,16 @@ const HorrifyingTroll: React.FC<HorrifyingTrollProps> = ({ open, onClose }) => {
     
     // Sequence of horrifying phases
     const phaseTimeouts = [
-      setTimeout(() => setPhase(1), 500),
-      setTimeout(() => setPhase(2), 1500),
-      setTimeout(() => setPhase(3), 2500),
-      setTimeout(() => setPhase(4), 3500),
-      setTimeout(() => setPhase(5), 4500),
+      setTimeout(() => setPhase(1), 300),
+      setTimeout(() => setPhase(2), 1000),
+      setTimeout(() => setPhase(3), 1800),
+      setTimeout(() => setPhase(4), 2600),
+      setTimeout(() => setPhase(5), 3400),
       setTimeout(() => {
         playSpecificSound('scream');
         setPhase(6);
-      }, 5500),
-      setTimeout(() => onClose(), 6800)
+      }, 4200),
+      setTimeout(() => onClose(), 5500)
     ];
     
     return () => {
@@ -48,6 +48,9 @@ const HorrifyingTroll: React.FC<HorrifyingTrollProps> = ({ open, onClose }) => {
       "/scary3.jpg",
       "/jumpscare.jpg",
       "/creepy-clown.jpg",
+      "/demon.jpg",
+      "/zombie.jpg",
+      "/ghost-face.jpg",
     ];
     return images[Math.floor(Math.random() * images.length)];
   };
@@ -64,41 +67,41 @@ const HorrifyingTroll: React.FC<HorrifyingTrollProps> = ({ open, onClose }) => {
       case 1:
         return (
           <div className="flex flex-col items-center">
-            <div className="text-red-500 text-4xl font-bold animate-glitch text-center mb-4">
-              YOU SHOULDN'T HAVE CLICKED THAT
+            <div className="text-red-500 text-5xl font-bold animate-glitch text-center mb-4">
+              YOU SHOULDN'T HAVE BEEN HERE
             </div>
-            <Ghost className="w-32 h-32 text-white animate-pulse" />
+            <Ghost className="w-40 h-40 text-white animate-pulse" />
           </div>
         );
       case 2:
         return (
           <div className="flex flex-col items-center">
-            <div className="text-white text-5xl font-bold animate-vibrate text-center mb-4">
-              TOO LATE TO ESCAPE
+            <div className="text-white text-6xl font-bold animate-vibrate text-center mb-4">
+              THE POLICE ARE COMING
             </div>
-            <BugPlay className="w-40 h-40 text-red-500 animate-spin-slow" />
+            <Siren className="w-40 h-40 text-blue-500 animate-pulse" />
           </div>
         );
       case 3:
         return (
-          <div className="text-neon-green text-6xl font-bold animate-glitch text-center">
-            YOUR DEVICE IS COMPROMISED
+          <div className="text-neon-green text-7xl font-bold animate-glitch text-center">
+            YOUR LOCATION IS TRACKED
           </div>
         );
       case 4:
         return (
           <div className="flex flex-col items-center">
-            <div className="text-white text-4xl font-bold animate-pulse text-center mb-4">
-              DELETING ALL FILES...
+            <div className="text-yellow-400 text-5xl font-bold animate-pulse text-center mb-4">
+              CRIMINAL ACTIVITY DETECTED
             </div>
             <div className="w-4/5 bg-gray-900 border border-red-500 rounded-lg overflow-hidden mt-8">
               <div 
-                className="bg-gradient-to-r from-red-500 via-red-700 to-red-500 h-6 animate-pulse"
-                style={{ width: '75%' }}
+                className="bg-gradient-to-r from-red-500 via-red-700 to-red-500 h-8 animate-pulse"
+                style={{ width: '95%' }}
               ></div>
             </div>
-            <div className="text-red-500 font-mono mt-4">
-              75% COMPLETE
+            <div className="text-red-500 font-mono mt-4 text-2xl">
+              95% EVIDENCE COLLECTED
             </div>
           </div>
         );
@@ -106,9 +109,9 @@ const HorrifyingTroll: React.FC<HorrifyingTrollProps> = ({ open, onClose }) => {
         return (
           <div className="flex flex-col items-center">
             <div className="text-white text-5xl font-bold animate-glitch text-center mb-8">
-              UPLOADING YOUR DATA TO DARK WEB
+              UPLOADING YOUR DATA TO AUTHORITIES
             </div>
-            <Skull className="w-48 h-48 text-red-500 animate-pulse" />
+            <Skull className="w-64 h-64 text-red-500 animate-pulse" />
           </div>
         );
       case 6:
@@ -120,8 +123,8 @@ const HorrifyingTroll: React.FC<HorrifyingTrollProps> = ({ open, onClose }) => {
               className="max-w-full max-h-full object-contain animate-vibrate"
             />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-6xl font-bold text-white animate-glitch text-center bg-black bg-opacity-70 p-4">
-                GOT YOU!!
+              <div className="text-8xl font-bold text-white animate-glitch text-center bg-black bg-opacity-70 p-4">
+                PAY $1000 NOW!!
               </div>
             </div>
           </div>
@@ -143,10 +146,10 @@ const HorrifyingTroll: React.FC<HorrifyingTrollProps> = ({ open, onClose }) => {
         {/* Random flickering elements */}
         {phase < 6 && (
           <div className="fixed inset-0 pointer-events-none">
-            {Array.from({ length: 30 }).map((_, i) => (
+            {Array.from({ length: 50 }).map((_, i) => (
               <div 
                 key={i}
-                className="absolute w-4 h-4 rounded-full bg-red-500 animate-pulse"
+                className="absolute w-6 h-6 rounded-full bg-red-500 animate-pulse"
                 style={{
                   top: `${Math.random() * 100}%`,
                   left: `${Math.random() * 100}%`,

@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
+import { X, Skull, AlertTriangle, Bug, Virus, Siren } from 'lucide-react';
 import { playSpecificSound } from '../assets/sounds';
 
 interface ScaryPopupProps {
@@ -19,8 +19,25 @@ const ScaryPopup: React.FC<ScaryPopupProps> = ({ onClose, position }) => {
       "/scary3.jpg",
       "/jumpscare.jpg",
       "/creepy-clown.jpg",
+      "/demon.jpg",
+      "/zombie.jpg",
+      "/ghost-face.jpg",
     ];
     return images[Math.floor(Math.random() * images.length)];
+  });
+  
+  const [alertType] = useState(() => {
+    const types = [
+      "VIRUS DETECTED",
+      "POLICE ALERT",
+      "SECURITY BREACH",
+      "DATA STOLEN",
+      "RANSOMWARE DETECTED",
+      "WEBCAM ACTIVATED",
+      "PERSONAL DATA LEAKED",
+      "IDENTITY THEFT ALERT"
+    ];
+    return types[Math.floor(Math.random() * types.length)];
   });
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -61,10 +78,21 @@ const ScaryPopup: React.FC<ScaryPopupProps> = ({ onClose, position }) => {
 
   // Play a scary sound when the popup appears
   useEffect(() => {
-    const sounds = ['scream', 'horror-scream', 'jumpscare', 'witch-laugh'];
+    const sounds = ['scream', 'horror-scream', 'jumpscare', 'witch-laugh', 'evil-laugh'];
     const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
     playSpecificSound(randomSound);
   }, []);
+
+  const randomIcon = () => {
+    const icons = [
+      <Skull className="h-5 w-5 text-red-500 animate-vibrate" />,
+      <AlertTriangle className="h-5 w-5 text-yellow-500 animate-pulse" />,
+      <Bug className="h-5 w-5 text-green-500 animate-spin-slow" />,
+      <Virus className="h-5 w-5 text-purple-500 animate-pulse" />,
+      <Siren className="h-5 w-5 text-blue-500 animate-pulse" />
+    ];
+    return icons[Math.floor(Math.random() * icons.length)];
+  };
 
   return (
     <div 
@@ -80,7 +108,10 @@ const ScaryPopup: React.FC<ScaryPopupProps> = ({ onClose, position }) => {
         className="windows-title-bar cursor-move bg-gradient-to-r from-red-700 to-red-900"
         onMouseDown={handleMouseDown}
       >
-        <span className="text-sm font-semibold animate-pulse">WARNING: VIRUS DETECTED</span>
+        <span className="text-sm font-semibold animate-pulse flex items-center">
+          {randomIcon()}
+          <span className="ml-1">{alertType}</span>
+        </span>
         <button 
           onClick={onClose}
           className="h-5 w-5 flex items-center justify-center rounded hover:bg-red-700"
@@ -95,8 +126,10 @@ const ScaryPopup: React.FC<ScaryPopupProps> = ({ onClose, position }) => {
             alt="Scary" 
             className="w-full h-40 object-cover mb-2 animate-pulse border border-red-500" 
           />
-          <div className="comic-text text-center animate-pulse">
-            YOUR COMPUTER IS INFECTED WITH 37 VIRUSES!
+          <div className="comic-text text-center animate-glitch">
+            {alertType === "POLICE ALERT" ? 
+              "YOU ARE UNDER SURVEILLANCE! PAY $1000 NOW!" : 
+              "YOUR COMPUTER IS INFECTED WITH DEADLY VIRUSES!"}
           </div>
         </div>
         <div className="flex justify-center mt-2">
