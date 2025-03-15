@@ -163,3 +163,175 @@
 .cursor-pointer {
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>💩</text></svg>") 16 0, auto;
 }
+
+@keyframes vibrate {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.animate-vibrate {
+  animation: vibrate 0.3s infinite;
+}
+
+@keyframes scary-flash {
+  0% { opacity: 1; }
+  5% { opacity: 0.3; }
+  10% { opacity: 1; }
+  15% { opacity: 0.3; }
+  20% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+.animate-scary-flash {
+  animation: scary-flash 5s infinite;
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-5px, 5px);
+  }
+  40% {
+    transform: translate(-5px, -5px);
+  }
+  60% {
+    transform: translate(5px, 5px);
+  }
+  80% {
+    transform: translate(5px, -5px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.animate-glitch {
+  animation: glitch 0.5s infinite;
+}
+
+@keyframes rotate-toilet {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-20vh) rotate(720deg);
+  }
+}
+
+.animate-rotate-toilet {
+  animation: rotate-toilet 2s ease-out forwards;
+}
+
+@keyframes typing {
+  from { height: 0; }
+  to { height: 100%; }
+}
+
+.animate-typing {
+  animation: typing 10s steps(40, end);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@keyframes windows-popup-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-windows-popup-in {
+  animation: windows-popup-in 0.3s ease-out forwards;
+}
+
+@keyframes fly-left-to-right {
+  0% {
+    left: -10vw;
+    top: var(--y-pos);
+    transform: rotate(var(--rotation)) scale(var(--scale));
+  }
+  100% {
+    left: 110vw;
+    top: var(--y-pos);
+    transform: rotate(calc(var(--rotation) + 360deg)) scale(var(--scale));
+  }
+}
+
+@keyframes fly-right-to-left {
+  0% {
+    right: -10vw;
+    top: var(--y-pos);
+    transform: rotate(var(--rotation)) scale(var(--scale));
+  }
+  100% {
+    right: 110vw;
+    top: var(--y-pos);
+    transform: rotate(calc(var(--rotation) + 360deg)) scale(var(--scale));
+  }
+}
+
+.animate-fly-left-to-right {
+  animation: fly-left-to-right 10s linear infinite;
+}
+
+.animate-fly-right-to-left {
+  animation: fly-right-to-left 10s linear infinite;
+}
+
+@keyframes pulse-border {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
+    border-color: rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+    border-color: rgba(255, 0, 0, 1);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
+    border-color: rgba(255, 0, 0, 0.5);
+  }
+}
+
+.animate-pulse-border {
+  animation: pulse-border 2s infinite;
+}
+
+/* Neon colors for the memes and effects */
+.bg-neon-green {
+  background-color: #39ff14;
+}
+
+.bg-neon-pink {
+  background-color: #ff00ff;
+}
+
+.bg-neon-blue {
+  background-color: #00ffff;
+}
+
+.bg-neon-yellow {
+  background-color: #ffff00;
+}
+
+.bg-neon-orange {
+  background-color: #ff5f1f;
+}
+
+.text-neon-green {
+  color: #39ff14;
+  text-shadow: 0 0 10px #39ff14;
+}

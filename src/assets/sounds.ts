@@ -13,6 +13,11 @@ const sounds: Sound[] = [
   { name: 'fart', path: '/fart.mp3', volume: 0.5 },
   { name: 'bonk', path: '/bonk.mp3', volume: 0.4 },
   { name: 'tada', path: '/tada.mp3', volume: 0.4 },
+  { name: 'scream', path: '/scream.mp3', volume: 0.4 },
+  { name: 'glass-break', path: '/glass-break.mp3', volume: 0.4 },
+  { name: 'witch-laugh', path: '/witch-laugh.mp3', volume: 0.3 },
+  { name: 'horror-scream', path: '/horror-scream.mp3', volume: 0.3 },
+  { name: 'jumpscare', path: '/jumpscare.mp3', volume: 0.5 },
 ];
 
 export const playRandomSound = (): void => {
@@ -20,4 +25,15 @@ export const playRandomSound = (): void => {
   const audio = new Audio(sound.path);
   audio.volume = sound.volume;
   audio.play().catch(e => console.error('Audio play failed:', e));
+};
+
+export const playSpecificSound = (name: string): void => {
+  const sound = sounds.find(s => s.name === name);
+  if (sound) {
+    const audio = new Audio(sound.path);
+    audio.volume = sound.volume;
+    audio.play().catch(e => console.error('Audio play failed:', e));
+  } else {
+    console.error(`Sound "${name}" not found`);
+  }
 };
