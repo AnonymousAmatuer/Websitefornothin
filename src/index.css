@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,19 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -96,6 +90,76 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
   }
+}
+
+.windows-dialog {
+  @apply bg-white border-2 border-[#0078D7] shadow-lg rounded-sm overflow-hidden;
+}
+
+.windows-title-bar {
+  @apply bg-gradient-to-r from-[#0078D7] to-[#00a2ed] text-white p-1 flex justify-between items-center;
+}
+
+.windows-content {
+  @apply p-4;
+}
+
+.windows-button {
+  @apply px-4 py-1 bg-[#e1e1e1] hover:bg-[#e5f1fb] hover:border-[#0078D7] border border-[#adadad] rounded-sm transition-colors;
+}
+
+@font-face {
+  font-family: "Comic Sans MS";
+  src: local("Comic Sans MS");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Impact";
+  src: local("Impact");
+  font-display: swap;
+}
+
+.text-outline {
+  text-shadow: 
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
+
+.meme-text {
+  font-family: "Impact", sans-serif;
+  @apply text-white text-outline uppercase font-bold tracking-wide;
+}
+
+.comic-text {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.glass-panel {
+  @apply backdrop-filter backdrop-blur-md bg-white bg-opacity-20 border border-white border-opacity-20 shadow-lg;
+}
+
+.spin-slow {
+  animation: spin 15s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.glow {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+.cursor-pointer {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>💩</text></svg>") 16 0, auto;
 }
